@@ -172,7 +172,9 @@ uis.controller('uiSelectCtrl',
 
   ctrl.focusSearchInput = function (initSearchValue) {
     ctrl.search = initSearchValue || ctrl.search;
-    ctrl.searchInput[0].focus();
+    if (navigator.userAgent.toLowerCase().indexOf('android') < 0) {
+      ctrl.searchInput[0].focus();
+    }
   };
 
   ctrl.findGroupByName = function(name, noStrict) {
@@ -457,7 +459,9 @@ uis.controller('uiSelectCtrl',
     if (ctrl.ngModel && ctrl.ngModel.$setTouched) ctrl.ngModel.$setTouched();
     ctrl.open = false;
     _resetSearchInput();
-    $scope.$broadcast('uis:close', skipFocusser);
+    if (navigator.userAgent.toLowerCase().indexOf('android') < 0) {
+      $scope.$broadcast('uis:close', skipFocusser);
+    }
 
   };
 
